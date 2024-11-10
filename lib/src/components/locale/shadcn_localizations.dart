@@ -11,12 +11,17 @@ class ShadcnLocalizationsDelegate
   const ShadcnLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => locale.languageCode == 'en';
+  bool isSupported(Locale locale) =>
+      locale.languageCode == 'en' || locale.languageCode == 'pt';
 
   @override
   Future<ShadcnLocalizations> load(Locale locale) {
+    if (locale.languageCode == "pt") {
+      return SynchronousFuture<ShadcnLocalizations>(PtBrShadcnLocalizations());
+    }
     return SynchronousFuture<ShadcnLocalizations>(
-        DefaultShadcnLocalizations.instance);
+      DefaultShadcnLocalizations.instance,
+    );
   }
 
   @override
@@ -735,4 +740,360 @@ class DefaultShadcnLocalizations extends ShadcnLocalizations {
 
   @override
   String get colorLightness => 'Lum';
+}
+
+class PtBrShadcnLocalizations extends ShadcnLocalizations {
+  @override
+  String get abbreviatedApril => "Abr";
+
+  @override
+  String get abbreviatedAugust => "Ago";
+
+  @override
+  String get abbreviatedDecember => "Dez";
+
+  @override
+  String get abbreviatedFebruary => "Fev";
+
+  @override
+  String get abbreviatedFriday => "Sex";
+
+  @override
+  String get abbreviatedJanuary => "Jan";
+
+  @override
+  String get abbreviatedJuly => "Jul";
+
+  @override
+  String get abbreviatedJune => "Jun";
+
+  @override
+  String get abbreviatedMarch => "Mar";
+
+  @override
+  String get abbreviatedMay => "Mai";
+
+  @override
+  String get abbreviatedMonday => "Seg";
+
+  @override
+  String get abbreviatedNovember => "Nov";
+
+  @override
+  String get abbreviatedOctober => "Out";
+
+  @override
+  String get abbreviatedSaturday => "Sáb";
+
+  @override
+  String get abbreviatedSeptember => "Set";
+
+  @override
+  String get abbreviatedSunday => "Dom";
+
+  @override
+  String get abbreviatedThursday => "Qui";
+
+  @override
+  String get abbreviatedTuesday => "Ter";
+
+  @override
+  String get abbreviatedWednesday => "Qua";
+
+  @override
+  String get buttonCancel => "Cancelar";
+
+  @override
+  String get buttonClose => "Fechar";
+
+  @override
+  String get buttonNext => "Próximo";
+
+  @override
+  String get buttonOk => "OK";
+
+  @override
+  String get buttonPrevious => "Anterior";
+
+  @override
+  String get buttonReset => "Redefinir";
+
+  @override
+  String get buttonSave => "Salvar";
+
+  @override
+  String get colorAlpha => "Alfa";
+
+  @override
+  String get colorBlue => "Azul";
+
+  @override
+  String get colorGreen => "Verde";
+
+  @override
+  String get colorHue => "Matiz";
+
+  @override
+  String get colorLightness => "Luminosidade";
+
+  @override
+  String get colorPickerTabHSL => "HSL";
+
+  @override
+  String get colorPickerTabHSV => "HSV";
+
+  @override
+  String get colorPickerTabRGB => "RGB";
+
+  @override
+  String get colorPickerTabRecent => "Recente";
+
+  @override
+  String get colorRed => "Vermelho";
+
+  @override
+  String get colorSaturation => "Saturação";
+
+  @override
+  String get colorValue => "Valor";
+
+  @override
+  String get commandEmpty => "Nenhum comando disponível";
+
+  @override
+  String get commandSearch => "Buscar";
+
+  @override
+  String get datePickerSelectYear => "Selecione um ano";
+
+  @override
+  String get emptyCountryList => "Nenhum país encontrado";
+
+  @override
+  String formBetweenExclusively(double min, double max) {
+    return "Entre $min e $max, exclusivamente";
+  }
+
+  @override
+  String formBetweenInclusively(double min, double max) {
+    return "Entre $min e $max, inclusivamente";
+  }
+
+  @override
+  String formGreaterThan(double value) {
+    return "Maior que $value";
+  }
+
+  @override
+  String formGreaterThanOrEqualTo(double value) {
+    return "Maior ou igual a $value";
+  }
+
+  @override
+  String formLengthGreaterThan(int value) {
+    return "Comprimento maior que $value";
+  }
+
+  @override
+  String formLengthLessThan(int value) {
+    return "Comprimento menor que $value";
+  }
+
+  @override
+  String formLessThan(double value) {
+    return "Menor que $value";
+  }
+
+  @override
+  String formLessThanOrEqualTo(double value) {
+    return "Menor ou igual a $value";
+  }
+
+  @override
+  String get formNotEmpty => "Não pode ser vazio";
+
+  @override
+  String get formPasswordDigits => "Deve conter dígitos";
+
+  @override
+  String get formPasswordLowercase => "Deve conter letras minúsculas";
+
+  @override
+  String get formPasswordSpecial => "Deve conter caracteres especiais";
+
+  @override
+  String get formPasswordUppercase => "Deve conter letras maiúsculas";
+
+  @override
+  String formatDateTime(
+    DateTime dateTime, {
+    bool showDate = true,
+    bool showTime = true,
+    bool showSeconds = false,
+    bool use24HourFormat = true,
+  }) {
+    final day = dateTime.day.toString().padLeft(2, '0');
+    final month = dateTime.month.toString().padLeft(2, '0');
+    final year = dateTime.year.toString();
+    final hour = dateTime.hour.toString().padLeft(2, '0');
+    final minute = dateTime.minute.toString().padLeft(2, '0');
+
+    if (!showDate) {
+      return "$hour:$minute";
+    }
+
+    if (showTime) {
+      if (showSeconds) {
+        final second = dateTime.second.toString().padLeft(2, '0');
+        return "$day/$month/$year $hour:$minute:$second";
+      }
+      return "$day/$month/$year $hour:$minute";
+    }
+    return "$day/$month/$year";
+  }
+
+  @override
+  String formatNumber(double value) {
+    return value.toStringAsFixed(2);
+  }
+
+  @override
+  String formatTimeOfDay(TimeOfDay time,
+      {bool use24HourFormat = true, bool showSeconds = false}) {
+    String timeString = "${time.hour}:${time.minute}";
+
+    if (showSeconds) {
+      final second = time.second.toString().padLeft(2, '0');
+      timeString = "$timeString:$second";
+    }
+
+    if (!use24HourFormat) {
+      timeString = time.hour > 12 ? "$timeString PM" : "$timeString AM";
+    }
+    return timeString;
+  }
+
+  @override
+  String get invalidEmail => "Email inválido";
+
+  @override
+  String get invalidURL => "URL inválida";
+
+  @override
+  String get invalidValue => "Valor inválido";
+
+  @override
+  Map<String, String> get localizedMimeTypes => {
+        "image/jpeg": "Imagem JPEG",
+        "image/png": "Imagem PNG",
+        "application/pdf": "Documento PDF",
+      };
+
+  @override
+  String get menuCopy => "Copiar";
+
+  @override
+  String get menuCut => "Cortar";
+
+  @override
+  String get menuDelete => "Excluir";
+
+  @override
+  String get menuLiveTextInput => "Entrada de Texto ao Vivo";
+
+  @override
+  String get menuPaste => "Colar";
+
+  @override
+  String get menuRedo => "Refazer";
+
+  @override
+  String get menuSearchWeb => "Buscar na Web";
+
+  @override
+  String get menuSelectAll => "Selecionar Tudo";
+
+  @override
+  String get menuShare => "Compartilhar";
+
+  @override
+  String get menuUndo => "Desfazer";
+
+  @override
+  String get monthApril => "Abril";
+
+  @override
+  String get monthAugust => "Agosto";
+
+  @override
+  String get monthDecember => "Dezembro";
+
+  @override
+  String get monthFebruary => "Fevereiro";
+
+  @override
+  String get monthJanuary => "Janeiro";
+
+  @override
+  String get monthJuly => "Julho";
+
+  @override
+  String get monthJune => "Junho";
+
+  @override
+  String get monthMarch => "Março";
+
+  @override
+  String get monthMay => "Maio";
+
+  @override
+  String get monthNovember => "Novembro";
+
+  @override
+  String get monthOctober => "Outubro";
+
+  @override
+  String get monthSeptember => "Setembro";
+
+  @override
+  String get placeholderColorPicker => "Selecione uma cor";
+
+  @override
+  String get placeholderDatePicker => "Selecione uma data";
+
+  @override
+  String get placeholderTimePicker => "Selecione um horário";
+
+  @override
+  String get refreshTriggerComplete => "Atualização completa";
+
+  @override
+  String get refreshTriggerPull => "Puxe para atualizar";
+
+  @override
+  String get refreshTriggerRefreshing => "Atualizando...";
+
+  @override
+  String get refreshTriggerRelease => "Solte para atualizar";
+
+  @override
+  String get searchPlaceholderCountry => "Buscar país...";
+
+  @override
+  String get timeAM => "AM";
+
+  @override
+  String get timeHour => "Hora";
+
+  @override
+  String get timeMinute => "Minuto";
+
+  @override
+  String get timePM => "PM";
+
+  @override
+  String get timeSecond => "Segundo";
+
+  @override
+  String get toastSnippetCopied => "Copiado para a área de transferência";
 }
